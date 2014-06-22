@@ -1,0 +1,35 @@
+application: weather-radars
+version: 2
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "30d"
+
+handlers:
+
+- url: /favicon.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon.ico
+
+- url: /(robots.txt)
+  static_files: static/\1
+  upload: static/(robots.txt)
+
+- url: /(.*\.appcache)
+  mime_type: text/cache-manifest
+  static_files: static/\1
+  upload: static/(.*\.appcache)
+  expiration: "0"
+
+- url: /img
+  static_dir: static/img
+
+- url: /css
+  static_dir: static/css
+
+- url: /js
+  static_dir: static/js
+
+- url: /.*
+  script: main.app
