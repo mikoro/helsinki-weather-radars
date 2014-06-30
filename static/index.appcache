@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Version 17
+# Version 1
 
 CACHE:
 
@@ -14,11 +14,12 @@ js/plugins.js
 js/services.js
 
 http://fonts.googleapis.com/css?family=Permanent+Marker|Open+Sans:400,700
-http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
+http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
+http://www.google-analytics.com/analytics.js
 
-http://themes.googleusercontent.com/static/fonts/permanentmarker/v1/9vYsg5VgPHKK8SXYbf3sMupm9E4gBdgiUiSJePew_SQ.woff
-http://themes.googleusercontent.com/static/fonts/opensans/v5/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff
-http://themes.googleusercontent.com/static/fonts/opensans/v5/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff
+http://themes.googleusercontent.com/static/fonts/permanentmarker/v3/9vYsg5VgPHKK8SXYbf3sMupm9E4gBdgiUiSJePew_SQ.woff
+http://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff
+http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff
 
 FALLBACK:
 
