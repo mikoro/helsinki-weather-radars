@@ -11,7 +11,7 @@ def get_and_parse(user_agent):
     """
     Load the website and extract time and image information into an array.
     """
-    request = urllib2.Request("http://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15", None, {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent + " dbd4d91e"})
+    request = urllib2.Request("http://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15", None, {"Cache-Control": "no-cache,max-age=0", "User-Agent": "dbd4d91e"})
     response = urllib2.urlopen(request).read()
 
     timestamps_start = response.find("var anim_timestamps = new Array(")
@@ -34,5 +34,5 @@ def get_and_parse(user_agent):
 
 
 if __name__ == "__main__":
-    result = get_and_parse("None")
+    result = get_and_parse("")
     print(json.dumps(obj=result, indent=1))

@@ -18,7 +18,7 @@
 	var map2ChangeInterval = 400;
 	var mapsTransitionDelay = 2000;
 	var mapsChangeTimerResetDelay = 500;
-	var mapsUpdateDataInterval = 30000;
+	var mapsUpdateDataInterval = 300000;
 	var mapsWidth = 700;
 	var mapsHeight = 595;
 	var map1IgnoreMouseMove = false;
