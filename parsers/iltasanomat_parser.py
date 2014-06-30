@@ -11,7 +11,7 @@ def get_and_parse(user_agent):
     """
     Load the website and extract time and image information into an array.
     """
-    request = urllib2.Request("http://saa.iltasanomat.fi/rain.php?area=etela-suomi", None, {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent})
+    request = urllib2.Request("http://saa.iltasanomat.fi/rain.php?area=etela-suomi", None, {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent + " 560599d1"})
     response = urllib2.urlopen(request).read()
 
     timestamps_start = response.find("var anim_timestamps = new Array(")

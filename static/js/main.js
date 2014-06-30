@@ -224,12 +224,12 @@
 	{
 		$("#map1_loader_container, #map2_loader_container").fadeIn("slow");
 
-		updateMapData("get/1", map1Data, function ()
+		updateMapData("get/testbed", map1Data, function ()
 		{
 			$("#map1_loader_container").fadeOut("slow");
 		});
 
-		updateMapData("get/2", map2Data, function ()
+		updateMapData("get/iltasanomat", map2Data, function ()
 		{
 			$("#map2_loader_container").fadeOut("slow");
 		});
@@ -277,7 +277,7 @@
 
 	$(function ()
 	{
-		$("#map1_canvas_container canvas, #map2_canvas_container canvas").attr({ width:mapsWidth, height:mapsHeight });
+		$("#map1_canvas_container canvas, #map2_canvas_container canvas").attr({ width: mapsWidth, height: mapsHeight });
 		$("#map1_canvas_container, #map1_info_container, #map2_canvas_container, #map2_info_container").hide();
 
 		map1Canvas = $("#map1_canvas_container canvas")[0].getContext("2d");
@@ -295,14 +295,14 @@
 		cl.setDiameter(40);
 		cl.show();
 
-		updateMapData("get/1", map1Data, function ()
+		updateMapData("get/testbed", map1Data, function ()
 		{
 			setMap1(map1Index++);
 			map1ChangeTimer = $.timer(map1ChangeInterval, map1ChangeTimerEvent);
 			$("#map1_canvas_container, #map1_info_container").fadeIn("slow");
 			$("#map1_loader_container").fadeOut("slow");
 
-			updateMapData("get/2", map2Data, function ()
+			updateMapData("get/iltasanomat", map2Data, function ()
 			{
 				setMap2(map2Index++);
 				map2ChangeTimer = $.timer(map2ChangeInterval, map2ChangeTimerEvent);
