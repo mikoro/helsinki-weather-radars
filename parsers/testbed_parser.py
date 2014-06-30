@@ -1,7 +1,9 @@
 # Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
 # License: MIT, see the LICENSE file.
 
+import binascii
 import json
+import os
 import urllib2
 
 from datetime import datetime
@@ -11,7 +13,10 @@ def get_and_parse(user_agent):
     """
     Load the website and extract time and image information into an array.
     """
-    request = urllib2.Request("http://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15", None, {"Cache-Control": "no-cache,max-age=0", "User-Agent": "dbd4d91e"})
+    request = urllib2.Request("http://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15",
+                              None,
+                              {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent + binascii.b2a_hex(os.urandom(4))})
+
     response = urllib2.urlopen(request).read()
 
     timestamps_start = response.find("var anim_timestamps = new Array(")
@@ -34,5 +39,5 @@ def get_and_parse(user_agent):
 
 
 if __name__ == "__main__":
-    result = get_and_parse("")
+    result = get_and_parse("None")
     print(json.dumps(obj=result, indent=1))
