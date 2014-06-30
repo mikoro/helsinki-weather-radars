@@ -113,41 +113,6 @@ header h1
 	margin-right: 6px;
 }
 
-footer
-{
-	height: 100px;
-	border-top: solid 3px rgb(120, 120, 120);
-	background: rgb(160, 160, 160); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(160, 160, 160, 1) 0%, rgba(140, 140, 140, 1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(160, 160, 160, 1)), color-stop(100%, rgba(140, 140, 140, 1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(160, 160, 160, 1) 0%, rgba(140, 140, 140, 1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(160, 160, 160, 1) 0%, rgba(140, 140, 140, 1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, rgba(160, 160, 160, 1) 0%, rgba(140, 140, 140, 1) 100%); /* IE10+ */
-}
-
-#share
-{
-	float: right;
-}
-
-#facebook
-{
-	float: left;
-	margin: 19px 9px 0 0;
-}
-
-#twitter
-{
-	float: left;
-	margin: 19px 20px 0 0;
-}
-
-#google
-{
-	float: left;
-	margin: 20px 40px 0 0;
-}
-
 @media screen and (max-width: 1508px)
 {
 	header
