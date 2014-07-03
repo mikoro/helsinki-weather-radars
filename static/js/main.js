@@ -37,12 +37,33 @@
 	var map2BottomLat = 58.551000;
 	var map2LeftLong = 18.600000;
 	var map2RightLong = 31.929000;
+	var map1ShowLocation = false;
+	var map2ShowLocation = false;
+	var map1LocationX = 0;
+	var map1LocationY = 0;
+	var map2LocationX = 0;
+	var map2LocationY = 0;
+
+	function drawLocation(canvas, x, y)
+	{
+		canvas.beginPath();
+		canvas.arc(x, y, 6, 0, 2 * Math.PI, false);
+		canvas.fillStyle = "rgba(255, 0, 0, 0.8)";
+		canvas.fill();
+		canvas.lineWidth = 1;
+		canvas.strokeStyle = "rgba(0, 0, 0, 1.0)";
+		canvas.stroke();
+	}
 
 	function setMap1(index)
 	{
 		if (map1Data[index] !== undefined)
 		{
 			map1Canvas.drawImage(map1Data[index].image, 0, 0, mapsWidth, mapsHeight);
+
+			if (map1ShowLocation)
+				drawLocation(map1Canvas, map1LocationX, map1LocationY);
+
 			$("#map1_info_date").html(map1Data[index].dateText);
 			$("#map1_info_time").html(map1Data[index].timeText);
 			$("#map1_info_index").html((index + 1) + "/" + map1Data.length);
@@ -54,6 +75,10 @@
 		if (map2Data[index] !== undefined)
 		{
 			map2Canvas.drawImage(map2Data[index].image, 0, 0, mapsWidth, mapsHeight);
+
+			if (map2ShowLocation)
+				drawLocation(map2Canvas, map2LocationX, map2LocationY);
+
 			$("#map2_info_date").html(map2Data[index].dateText);
 			$("#map2_info_time").html(map2Data[index].timeText + (index >= map2TypeChangeIndex ? "*" : ""));
 			$("#map2_info_index").html((index + 1) + "/" + map2Data.length);
@@ -326,7 +351,29 @@
 
 		if (Modernizr.geolocation)
 		{
+			navigator.geolocation.watchPosition(function (position)
+			{
+				var latitude = position.coords.latitude;
+				var longitude = position.coords.longitude;
 
+				if (latitude > map1BottomLat && latitude < map1TopLat && longitude > map1LeftLong && longitude < map1RightLong)
+				{
+					map1LocationX = Math.round(((longitude - map1LeftLong) / (map1RightLong - map1LeftLong)) * mapsWidth);
+					map1LocationY = Math.round(((map1TopLat - latitude) / (map1TopLat - map1BottomLat)) * mapsHeight);
+					map1ShowLocation = true;
+				}
+				else
+					map1ShowLocation = false;
+
+				if (latitude > map2BottomLat && latitude < map2TopLat && longitude > map2LeftLong && longitude < map2RightLong)
+				{
+					map2LocationX = Math.round(((longitude - map2LeftLong) / (map2RightLong - map2LeftLong)) * mapsWidth);
+					map2LocationY = Math.round(((map2TopLat - latitude) / (map2TopLat - map2BottomLat)) * mapsHeight);
+					map2ShowLocation = true;
+				}
+				else
+					map2ShowLocation = false;
+			});
 		}
 	});
 })();
