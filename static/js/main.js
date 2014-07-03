@@ -1,18 +1,6 @@
 // Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
 // License: MIT, see the LICENSE file.
 
-// map1
-// TL: 61.008400 / 22.735300
-// TR: 61.008400 / 26.763900
-// BR: 59.307000 / 26.763900
-// BL: 59.307000 / 22.735300
-
-// map2
-// TL: 64.696400 / 18.600000
-// TR: 64.696400 / 31.929000
-// BR: 58.551000 / 31.929000
-// BL: 58.551000 / 18.600000
-
 (function ()
 {
 	"use strict";
@@ -41,6 +29,14 @@
 	var map1IgnoreTransitionDelay = false;
 	var map2IgnoreTransitionDelay = false;
 	var map2TypeChangeIndex = 8;
+	var map1TopLat = 61.008400;
+	var map1BottomLat = 59.307000;
+	var map1LeftLong = 22.735300;
+	var map1RightLong = 26.763900;
+	var map2TopLat = 64.696400;
+	var map2BottomLat = 58.551000;
+	var map2LeftLong = 18.600000;
+	var map2RightLong = 31.929000;
 
 	function setMap1(index)
 	{
@@ -327,5 +323,10 @@
 		});
 
 		$.timer(mapsUpdateDataInterval, updateMapsDataTimerEvent);
+
+		if (Modernizr.geolocation)
+		{
+
+		}
 	});
 })();
