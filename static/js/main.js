@@ -29,10 +29,10 @@
 	var map1IgnoreTransitionDelay = false;
 	var map2IgnoreTransitionDelay = false;
 	var map2TypeChangeIndex = 8;
-	var map1TopLat = 61.008400;
-	var map1BottomLat = 59.307000;
-	var map1LeftLong = 22.735300;
-	var map1RightLong = 26.763900;
+	var map1TopLat = 61.017239;
+	var map1BottomLat = 59.314766;
+	var map1LeftLong = 22.749985;
+	var map1RightLong = 26.731884;
 	var map2TopLat = 64.696400;
 	var map2BottomLat = 58.551000;
 	var map2LeftLong = 18.600000;
