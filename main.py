@@ -7,8 +7,8 @@ import handlers
 
 routes = [
     ("/", handlers.IndexHandler),
-    ("/get/testbed", handlers.GetTestbedDataHandler),
-    ("/get/iltasanomat", handlers.GetIltasanomatDataHandler)
+    ("/get/1", handlers.GetTestbedDataHandler),
+    ("/get/2", handlers.GetIltasanomatDataHandler)
 ]
 
 app = webapp2.WSGIApplication(routes, debug=True)

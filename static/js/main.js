@@ -1,6 +1,18 @@
 // Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
 // License: MIT, see the LICENSE file.
 
+// map1
+// TL: 61.008400 / 22.735300
+// TR: 61.008400 / 26.763900
+// BR: 59.307000 / 26.763900
+// BL: 59.307000 / 22.735300
+
+// map2
+// TL: 64.696400 / 18.600000
+// TR: 64.696400 / 31.929000
+// BR: 58.551000 / 31.929000
+// BL: 58.551000 / 18.600000
+
 (function ()
 {
 	"use strict";
@@ -227,12 +239,12 @@
 	{
 		$("#map1_loader_container, #map2_loader_container").fadeIn("slow");
 
-		updateMapData("get/testbed", map1Data, function ()
+		updateMapData("get/1", map1Data, function ()
 		{
 			$("#map1_loader_container").fadeOut("slow");
 		});
 
-		updateMapData("get/iltasanomat", map2Data, function ()
+		updateMapData("get/2", map2Data, function ()
 		{
 			$("#map2_loader_container").fadeOut("slow");
 		});
@@ -298,14 +310,14 @@
 		cl.setDiameter(40);
 		cl.show();
 
-		updateMapData("get/testbed", map1Data, function ()
+		updateMapData("get/1", map1Data, function ()
 		{
 			setMap1(map1Index++);
 			map1ChangeTimer = $.timer(map1ChangeInterval, map1ChangeTimerEvent);
 			$("#map1_canvas_container, #map1_info_container").fadeIn("slow");
 			$("#map1_loader_container").fadeOut("slow");
 
-			updateMapData("get/iltasanomat", map2Data, function ()
+			updateMapData("get/2", map2Data, function ()
 			{
 				setMap2(map2Index++);
 				map2ChangeTimer = $.timer(map2ChangeInterval, map2ChangeTimerEvent);
