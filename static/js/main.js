@@ -47,8 +47,8 @@
 	function drawLocation(canvas, x, y)
 	{
 		canvas.beginPath();
-		canvas.arc(x, y, 6, 0, 2 * Math.PI, false);
-		canvas.fillStyle = "rgba(255, 0, 0, 0.8)";
+		canvas.arc(x, y, 4, 0, 2 * Math.PI, false);
+		canvas.fillStyle = "rgba(255, 0, 0, 1.0)";
 		canvas.fill();
 		canvas.lineWidth = 1;
 		canvas.strokeStyle = "rgba(0, 0, 0, 1.0)";
