@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
+# Copyright (C) 2021 Mikko Ronkainen <firstname@mikkoronkainen.com>
 # License: MIT, see the LICENSE file.
 
 import binascii
@@ -11,10 +11,9 @@ from datetime import datetime
 
 def get_and_parse(user_agent):
     request = urllib.request.Request(
-        "https://cdn.fmi.fi/apps/list-finland-radar-images/index.php?product-id=etela-suomi&flash=true",
+        "http://cdn.fmi.fi/apps/list-finland-radar-images/index.php?product-id=etela-suomi&flash=true",
         None,
-        {"Cache-Control": "no-cache,max-age=0",
-         "User-Agent": user_agent + binascii.b2a_hex(os.urandom(4)).decode()})
+        {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent + binascii.b2a_hex(os.urandom(4)).decode()})
 
     response = json.loads(urllib.request.urlopen(request).read().decode())
 

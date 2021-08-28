@@ -1,17 +1,31 @@
-# Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
+# Copyright (C) 2021 Mikko Ronkainen <firstname@mikkoronkainen.com>
 # License: MIT, see the LICENSE file.
 
-import webapp2
+import json
 
-import handlers
+from flask import Flask
+from flask import request
 
-routes = [
-    ("/", handlers.IndexHandler),
-    ("/get/1", handlers.GetTestbedDataHandler),
-    ("/get/2", handlers.GetIltasanomatDataHandler)
-]
+from parsers import ilmatieteenlaitos_parser
+from parsers import testbed_parser
 
-app = webapp2.WSGIApplication(routes, debug=True)
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
+
+
+@app.route("/get/1")
+def get1():
+    return json.dumps(obj=testbed_parser.get_and_parse(request.headers.get("User-Agent")), indent=1)
+
+
+@app.route("/get/2")
+def get2():
+    return json.dumps(obj=ilmatieteenlaitos_parser.get_and_parse(request.headers.get("User-Agent")), indent=1)
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="127.0.0.1", port=8080, debug=True)

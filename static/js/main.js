@@ -1,4 +1,4 @@
-// Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
+// Copyright (C) 2021 Mikko Ronkainen <firstname@mikkoronkainen.com>
 // License: MIT, see the LICENSE file.
 
 (function ()
@@ -33,10 +33,10 @@
 	var map1BottomLat = 59.314766;
 	var map1LeftLong = 22.749985;
 	var map1RightLong = 26.731884;
-	var map2TopLat = 64.696400;
-	var map2BottomLat = 58.551000;
-	var map2LeftLong = 18.600000;
-	var map2RightLong = 31.929000;
+	var map2TopLat = 63.841367;
+	var map2BottomLat = 58.149336;
+	var map2LeftLong = 19.178697;
+	var map2RightLong = 31.305304;
 	var map1ShowLocation = false;
 	var map2ShowLocation = false;
 	var map1LocationX = 0;

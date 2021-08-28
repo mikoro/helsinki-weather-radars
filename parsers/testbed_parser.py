@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Mikko Ronkainen <firstname@mikkoronkainen.com>
+# Copyright (C) 2021 Mikko Ronkainen <firstname@mikkoronkainen.com>
 # License: MIT, see the LICENSE file.
 
 import binascii
