@@ -24,8 +24,6 @@
 	var mapsUpdateDataInterval = 300000;
 	var mapsWidth = 700;
 	var mapsHeight = 595;
-	var map1IgnoreMouseMove = false;
-	var map2IgnoreMouseMove = false;
 	var map1IgnoreTransitionDelay = false;
 	var map2IgnoreTransitionDelay = false;
 	var map1TopLat = 61.017239;
@@ -148,65 +146,49 @@
 		});
 	}
 
-	$("#map1_inner_container").mousemove(function (event)
-	{
-		if (map1IgnoreMouseMove)
-		{
-			map1IgnoreMouseMove = false;
-			return;
-		}
-
-		calculateAndSetMap1Index((event.pageX - $(this).offset().left), $(this).outerWidth());
-	});
-
-	$("#map2_inner_container").mousemove(function (event)
-	{
-		if (map2IgnoreMouseMove)
-		{
-			map2IgnoreMouseMove = false;
-			return;
-		}
-
-		calculateAndSetMap2Index((event.pageX - $(this).offset().left), $(this).outerWidth());
-	});
-
 	$("#map1_inner_container")
 		.mouseenter(stopMap1ChangeTimer)
+		.mousemove(function (event)
+		{
+			calculateAndSetMap1Index((event.pageX - $(this).offset().left), $(this).outerWidth());
+		})
 		.mouseleave(function ()
 		{
 			map1LastCalculatedIndex = -1;
 			restartMap1ChangeTimer(mapsChangeTimerResetDelay);
 			map1IgnoreTransitionDelay = true;
-		})
-		.click(function ()
-		{
-			map1IgnoreMouseMove = true;
-			stopMap1ChangeTimer();
-
-			if (++map1Index >= map1Data.length)
-				map1Index = 0;
-
-			setMap1(map1Index);
 		});
 
 	$("#map2_inner_container")
 		.mouseenter(stopMap2ChangeTimer)
+		.mousemove(function (event)
+		{
+			calculateAndSetMap2Index((event.pageX - $(this).offset().left), $(this).outerWidth());
+		})
 		.mouseleave(function ()
 		{
 			map2LastCalculatedIndex = -1;
 			restartMap2ChangeTimer(mapsChangeTimerResetDelay);
 			map2IgnoreTransitionDelay = true;
-		})
-		.click(function ()
-		{
-			map2IgnoreMouseMove = true;
-			stopMap2ChangeTimer();
-
-			if (++map2Index >= map2Data.length)
-				map2Index = 0;
-
-			setMap2(map2Index);
 		});
+
+	function handleMove1(evt) {
+		var touches = evt.targetTouches;
+
+		if (touches.length >= 1)
+		{
+			calculateAndSetMap1Index((touches[0].pageX - $("#map1_inner_container").offset().left), $("#map1_inner_container").outerWidth());
+		}
+	}
+
+	function handleMove2(evt) {
+		var touches = evt.targetTouches;
+
+		if (touches.length >= 1)
+		{
+			calculateAndSetMap2Index((touches[0].pageX - $("#map2_inner_container").offset().left), $("#map2_inner_container").outerWidth());
+		}
+	}
 
 	function map1ChangeTimerEvent()
 	{
@@ -306,6 +288,9 @@
 
 		map1Canvas = $("#map1_canvas_container canvas")[0].getContext("2d");
 		map2Canvas = $("#map2_canvas_container canvas")[0].getContext("2d");
+
+		document.getElementById("canvas1").addEventListener("touchmove", handleMove1, false);
+		document.getElementById("canvas2").addEventListener("touchmove", handleMove2, false);
 
 		var cl = new CanvasLoader("map1_loader");
 		cl.setColor("#000000");
