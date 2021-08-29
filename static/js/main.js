@@ -5,41 +5,41 @@
 {
 	"use strict";
 
-	var map1Data = [];
-	var map1Canvas;
-	var map2Data = [];
-	var map2Canvas;
-	var map1Index = 0;
-	var map1LastCalculatedIndex = -1;
-	var map2Index = 0;
-	var map2LastCalculatedIndex = -1;
-	var map1ChangeTimer;
-	var map1ChangeTimerResetTimer;
-	var map2ChangeTimer;
-	var map2ChangeTimerResetTimer;
-	var map1ChangeInterval = 400;
-	var map2ChangeInterval = 400;
-	var mapsTransitionDelay = 2000;
-	var mapsChangeTimerResetDelay = 500;
-	var mapsUpdateDataInterval = 300000;
-	var mapsWidth = 700;
-	var mapsHeight = 595;
-	var map1IgnoreTransitionDelay = false;
-	var map2IgnoreTransitionDelay = false;
-	var map1TopLat = 61.017239;
-	var map1BottomLat = 59.314766;
-	var map1LeftLong = 22.749985;
-	var map1RightLong = 26.731884;
-	var map2TopLat = 63.841367;
-	var map2BottomLat = 58.149336;
-	var map2LeftLong = 19.178697;
-	var map2RightLong = 31.305304;
-	var map1ShowLocation = false;
-	var map2ShowLocation = false;
-	var map1LocationX = 0;
-	var map1LocationY = 0;
-	var map2LocationX = 0;
-	var map2LocationY = 0;
+	let map1Data = [];
+	let map1Canvas;
+	let map2Data = [];
+	let map2Canvas;
+	let map1Index = 0;
+	let map1LastCalculatedIndex = -1;
+	let map2Index = 0;
+	let map2LastCalculatedIndex = -1;
+	let map1ChangeTimer;
+	let map1ChangeTimerResetTimer;
+	let map2ChangeTimer;
+	let map2ChangeTimerResetTimer;
+	let map1ChangeInterval = 400;
+	let map2ChangeInterval = 400;
+	let mapsTransitionDelay = 2000;
+	let mapsChangeTimerResetDelay = 500;
+	let mapsUpdateDataInterval = 300000;
+	let mapsWidth = 700;
+	let mapsHeight = 595;
+	let map1IgnoreTransitionDelay = false;
+	let map2IgnoreTransitionDelay = false;
+	let map1TopLat = 61.017239;
+	let map1BottomLat = 59.314766;
+	let map1LeftLong = 22.749985;
+	let map1RightLong = 26.731884;
+	let map2TopLat = 63.841367;
+	let map2BottomLat = 58.149336;
+	let map2LeftLong = 19.178697;
+	let map2RightLong = 31.305304;
+	let map1ShowLocation = false;
+	let map2ShowLocation = false;
+	let map1LocationX = 0;
+	let map1LocationY = 0;
+	let map2LocationX = 0;
+	let map2LocationY = 0;
 
 	function drawLocation(canvas, x, y)
 	{
@@ -84,7 +84,7 @@
 
 	function calculateAndSetMap1Index(offset, width)
 	{
-		var index = Math.floor((offset / width) * map1Data.length);
+		let index = Math.floor((offset / width) * map1Data.length);
 
 		if (index !== map1LastCalculatedIndex)
 		{
@@ -96,7 +96,7 @@
 
 	function calculateAndSetMap2Index(offset, width)
 	{
-		var index = Math.floor((offset / width) * map2Data.length);
+		let index = Math.floor((offset / width) * map2Data.length);
 
 		if (index !== map2LastCalculatedIndex)
 		{
@@ -172,8 +172,12 @@
 			map2IgnoreTransitionDelay = true;
 		});
 
-	function handleMove1(evt) {
-		var touches = evt.targetTouches;
+	function handleTouchstart1() {
+		stopMap1ChangeTimer();
+	}
+
+	function handleTouchmove1(evt) {
+		let touches = evt.targetTouches;
 
 		if (touches.length >= 1)
 		{
@@ -181,13 +185,29 @@
 		}
 	}
 
-	function handleMove2(evt) {
-		var touches = evt.targetTouches;
+	function handleTouchend1() {
+		map1LastCalculatedIndex = -1;
+		restartMap1ChangeTimer(mapsChangeTimerResetDelay);
+		map1IgnoreTransitionDelay = true;
+	}
+
+	function handleTouchstart2() {
+		stopMap2ChangeTimer();
+	}
+
+	function handleTouchmove2(evt) {
+		let touches = evt.targetTouches;
 
 		if (touches.length >= 1)
 		{
 			calculateAndSetMap2Index((touches[0].pageX - $("#map2_inner_container").offset().left), $("#map2_inner_container").outerWidth());
 		}
+	}
+
+	function handleTouchend2() {
+		map2LastCalculatedIndex = -1;
+		restartMap2ChangeTimer(mapsChangeTimerResetDelay);
+		map2IgnoreTransitionDelay = true;
 	}
 
 	function map1ChangeTimerEvent()
@@ -245,9 +265,9 @@
 	{
 		$.getJSON(url, function (data)
 		{
-			var imagesLeft = data.length;
+			let imagesLeft = data.length;
 
-			var imageLoaded = function ()
+			let imageLoaded = function ()
 			{
 				if (--imagesLeft === 0)
 				{
@@ -259,12 +279,12 @@
 				}
 			};
 
-			for (var i in data)
+			for (let i in data)
 			{
 				if (!data.hasOwnProperty(i))
 					continue;
 
-				var date = new Date(data[i].dateTime);
+				let date = new Date(data[i].dateTime);
 
 				data[i].image = new Image();
 				data[i].dateText = date.format("dd.mm");
@@ -289,10 +309,19 @@
 		map1Canvas = $("#map1_canvas_container canvas")[0].getContext("2d");
 		map2Canvas = $("#map2_canvas_container canvas")[0].getContext("2d");
 
-		document.getElementById("canvas1").addEventListener("touchmove", handleMove1, false);
-		document.getElementById("canvas2").addEventListener("touchmove", handleMove2, false);
+		let canvas1 = document.getElementById("canvas1");
+		canvas1.addEventListener("touchstart", handleTouchstart1, false);
+		canvas1.addEventListener("touchmove", handleTouchmove1, false);
+		canvas1.addEventListener("touchend", handleTouchend1, false);
+		canvas1.addEventListener("touchcancel", handleTouchend1, false);
 
-		var cl = new CanvasLoader("map1_loader");
+		let canvas2 = document.getElementById("canvas2");
+		canvas2.addEventListener("touchstart", handleTouchstart2, false);
+		canvas2.addEventListener("touchmove", handleTouchmove2, false);
+		canvas2.addEventListener("touchend", handleTouchend2, false);
+		canvas2.addEventListener("touchcancel", handleTouchend2, false);
+
+		let cl = new CanvasLoader("map1_loader");
 		cl.setColor("#000000");
 		cl.setShape("spiral");
 		cl.setDiameter(40);
@@ -326,8 +355,8 @@
 		{
 			navigator.geolocation.watchPosition(function (position)
 			{
-				var latitude = position.coords.latitude;
-				var longitude = position.coords.longitude;
+				let latitude = position.coords.latitude;
+				let longitude = position.coords.longitude;
 
 				if (latitude > map1BottomLat && latitude < map1TopLat && longitude > map1LeftLong && longitude < map1RightLong)
 				{
