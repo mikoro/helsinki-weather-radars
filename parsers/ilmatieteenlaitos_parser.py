@@ -20,7 +20,7 @@ def get_and_parse(user_agent):
     result2 = []
 
     for i in response["images"]:
-        time = datetime.fromtimestamp(int(i["epoch"]) / 1000)
+        time = datetime.utcfromtimestamp(int(i["epoch"]) / 1000)
         time = time.strftime("%Y-%m-%dT%H:%M:%SZ")
         result2.append({"dateTime": time, "imageUrl": i["url"]})
 

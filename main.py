@@ -4,6 +4,7 @@
 import json
 
 from flask import Flask
+from flask import render_template
 from flask import request
 
 from parsers import ilmatieteenlaitos_parser
@@ -14,7 +15,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return app.send_static_file("index.html")
+    return render_template("index.html")
 
 
 @app.route("/get/1")
