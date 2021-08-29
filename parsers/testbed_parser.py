@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 def get_and_parse(user_agent):
-    request = urllib.request.Request("http://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15",
+    request = urllib.request.Request("https://testbed.fmi.fi/history_browser.php?imgtype=radar&t=5&n=15",
                                      None,
                                      {"Cache-Control": "no-cache,max-age=0",
                                       "User-Agent": user_agent + binascii.b2a_hex(os.urandom(4)).decode()})

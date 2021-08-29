@@ -11,7 +11,7 @@ from datetime import datetime
 
 def get_and_parse(user_agent):
     request = urllib.request.Request(
-        "http://cdn.fmi.fi/apps/list-finland-radar-images/index.php?product-id=etela-suomi&flash=true",
+        "https://cdn.fmi.fi/apps/list-finland-radar-images/index.php?product-id=etela-suomi&flash=true",
         None,
         {"Cache-Control": "no-cache,max-age=0", "User-Agent": user_agent + binascii.b2a_hex(os.urandom(4)).decode()})
 
