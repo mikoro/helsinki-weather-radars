@@ -325,14 +325,14 @@
 			map1ChangeTimer = $.timer(map1ChangeInterval, map1ChangeTimerEvent);
 			$("#map1_canvas_container").fadeIn("slow");
 			$("#map1_loader_container").fadeOut("slow");
+		});
 
-			updateMapData("get/2", map2Data, function ()
-			{
-				setMap2(map2Index++);
-				map2ChangeTimer = $.timer(map2ChangeInterval, map2ChangeTimerEvent);
-				$("#map2_canvas_container").fadeIn("slow");
-				$("#map2_loader_container").fadeOut("slow");
-			});
+		updateMapData("get/2", map2Data, function ()
+		{
+			setMap2(map2Index++);
+			map2ChangeTimer = $.timer(map2ChangeInterval, map2ChangeTimerEvent);
+			$("#map2_canvas_container").fadeIn("slow");
+			$("#map2_loader_container").fadeOut("slow");
 		});
 
 		$.timer(mapsUpdateDataInterval, updateMapsDataTimerEvent);
