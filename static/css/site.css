@@ -19,14 +19,6 @@
 	src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format("woff");
 }
 
-@font-face
-{
-	font-family: "Permanent Marker";
-	font-style: normal;
-	font-weight: 400;
-	src: local("Permanent Marker"), local("PermanentMarker"), url(https://themes.googleusercontent.com/static/fonts/permanentmarker/v3/9vYsg5VgPHKK8SXYbf3sMupm9E4gBdgiUiSJePew_SQ.woff) format("woff");
-}
-
 html, body
 {
 	min-width: 744px;
@@ -63,22 +55,6 @@ body
 {
 }
 
-header
-{
-	height: 238px;
-}
-
-header h1
-{
-	font-family: "Permanent Marker", cursive;
-	font-size: 80px;
-	text-align: center;
-	line-height: 1;
-	margin: 0;
-	padding: 71px 0;
-	white-space: nowrap;
-}
-
 #maps_container
 {
 	width: 1508px;
@@ -89,11 +65,13 @@ header h1
 #map1_outer_container
 {
 	float: left;
+	margin-top: 60px;
 }
 
 #map2_outer_container
 {
 	float: right;
+	margin-top: 60px;
 }
 
 #map1_inner_container, #map2_inner_container
@@ -119,40 +97,8 @@ header h1
 	margin: 10px 0 0 10px;
 }
 
-#map1_info_container, #map2_info_container
-{
-	font-weight: bold;
-	padding-top: 8px;
-}
-
-#map1_info_date, #map1_info_time, #map2_info_date, #map2_info_time
-{
-	float: left;
-}
-
-#map1_info_index, #map2_info_index
-{
-	float: right;
-}
-
-#map1_info_date, #map2_info_date
-{
-	margin-right: 6px;
-}
-
 @media screen and (max-width: 1508px)
 {
-	header
-	{
-		height: 100px;
-	}
-
-	header h1
-	{
-		font-size: 40px;
-		padding: 26px 0;
-	}
-
 	#maps_container
 	{
 		width: 704px;
@@ -162,6 +108,7 @@ header h1
 	#map1_outer_container
 	{
 		float: none;
+		margin-top: 60px;
 	}
 
 	#map2_outer_container

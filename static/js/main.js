@@ -28,7 +28,6 @@
 	var map2IgnoreMouseMove = false;
 	var map1IgnoreTransitionDelay = false;
 	var map2IgnoreTransitionDelay = false;
-	var map2TypeChangeIndex = 8;
 	var map1TopLat = 61.017239;
 	var map1BottomLat = 59.314766;
 	var map1LeftLong = 22.749985;
@@ -64,9 +63,9 @@
 			if (map1ShowLocation)
 				drawLocation(map1Canvas, map1LocationX, map1LocationY);
 
-			$("#map1_info_date").html(map1Data[index].dateText);
-			$("#map1_info_time").html(map1Data[index].timeText);
-			$("#map1_info_index").html((index + 1) + "/" + map1Data.length);
+			map1Canvas.font = "bold 25px Open Sans";
+			map1Canvas.fillStyle = "red";
+			map1Canvas.fillText(map1Data[index].timeText, mapsWidth - 75, 27);
 		}
 	}
 
@@ -79,9 +78,9 @@
 			if (map2ShowLocation)
 				drawLocation(map2Canvas, map2LocationX, map2LocationY);
 
-			$("#map2_info_date").html(map2Data[index].dateText);
-			$("#map2_info_time").html(map2Data[index].timeText + (index >= map2TypeChangeIndex ? "*" : ""));
-			$("#map2_info_index").html((index + 1) + "/" + map2Data.length);
+			map2Canvas.font = "bold 25px Open Sans";
+			map2Canvas.fillStyle = "red";
+			map2Canvas.fillText(map2Data[index].timeText, mapsWidth - 75, 27);
 		}
 	}
 
@@ -209,11 +208,6 @@
 			setMap2(map2Index);
 		});
 
-	$("header h1").dblclick(function ()
-	{
-		updateMapsDataTimerEvent();
-	});
-
 	function map1ChangeTimerEvent()
 	{
 		setMap1(map1Index);
@@ -234,15 +228,9 @@
 
 	function map2ChangeTimerEvent()
 	{
-		setMap2(map2Index++);
+		setMap2(map2Index);
 
-		if (map2Index === map2TypeChangeIndex && !map2IgnoreTransitionDelay)
-		{
-			stopMap2ChangeTimer();
-			restartMap2ChangeTimer(mapsTransitionDelay);
-		}
-
-		if (map2Index >= map2Data.length)
+		if (++map2Index >= map2Data.length)
 		{
 			map2Index = 0;
 
@@ -314,7 +302,7 @@
 	$(function ()
 	{
 		$("#map1_canvas_container canvas, #map2_canvas_container canvas").attr({ width: mapsWidth, height: mapsHeight });
-		$("#map1_canvas_container, #map1_info_container, #map2_canvas_container, #map2_info_container").hide();
+		$("#map1_canvas_container, #map2_canvas_container").hide();
 
 		map1Canvas = $("#map1_canvas_container canvas")[0].getContext("2d");
 		map2Canvas = $("#map2_canvas_container canvas")[0].getContext("2d");
@@ -335,14 +323,14 @@
 		{
 			setMap1(map1Index++);
 			map1ChangeTimer = $.timer(map1ChangeInterval, map1ChangeTimerEvent);
-			$("#map1_canvas_container, #map1_info_container").fadeIn("slow");
+			$("#map1_canvas_container").fadeIn("slow");
 			$("#map1_loader_container").fadeOut("slow");
 
 			updateMapData("get/2", map2Data, function ()
 			{
 				setMap2(map2Index++);
 				map2ChangeTimer = $.timer(map2ChangeInterval, map2ChangeTimerEvent);
-				$("#map2_canvas_container, #map2_info_container").fadeIn("slow");
+				$("#map2_canvas_container").fadeIn("slow");
 				$("#map2_loader_container").fadeOut("slow");
 			});
 		});
